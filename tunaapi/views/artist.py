@@ -16,8 +16,7 @@ class ArtistView(ViewSet):
             Response -- JSON serialized artist
         """
 
-        artist = Artist.objects.get(pk=pk).annotate(song_count=Count('songs'))
-        # artist = Artist.objects.annotate(song_count=Count('songs'))
+        artist = Artist.objects.annotate(song_count=Count('songs')).get(pk=pk)
 
 
         serializer = SingleArtistSerializer(artist)
